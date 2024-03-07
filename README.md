@@ -2,21 +2,28 @@ Following the steps you should perform after cloning this template repository:
 
 1. execute init.sh
 2. adjust/check the TBD in this file
+3. add a [new discussion category](https://github.com/tegonal/scala-commons/discussions/categories/new) 
+   `Contributor Q&A` -- `Ask other contributors for help`
+4. in order that the tegonal-bot pushes changes to its own fork (e.g. when executing gt-update.yml -- 
+   see below for an explanation) and then create a normal PR you need to:
+   1. [add the repository variable](https://github.com/tegonal/minimalist/settings/variables/actions/new)
+      `AUTO_PR_FORK_NAME` with value tegonal-bot/PROJECT_NAME_GITHUB
+   2. login as tegonal-bot and then [fork the repository](https://github.com/tegonal/PROJECT_NAME_GITHUB/fork)
 
-3. Following a short introduction in the scripts already setup in this repository:
+5. Following a short introduction in the scripts already setup in this repository:
    1. before-pr.sh is executed in .github/workflows/quality_assurance.yml and runs cleanup-on-push-to-main.sh and run-shellcheck.sh 
    2. cleanup-on-push-to-main.sh is executed in .github/workflows/cleanup.yml meant to cleanup after a PR.
       => put commands such as code formatting in it
-   3. run-shellcheck.sh checks that shellchecks in /scripts don't have issues 
+   3. run-shellcheck.sh checks that shellcheck doesn't find issues in script located in /scripts 
  
-4. Following a short introduction in the worfklows already setup in this respository:
+6. Following a short introduction in the workflows already setup in this repository:
    1. cleanup.yml => run after push on main and intended to cleanup after a PR. 
    2. gt-update.yml => run periodically, updates all files pulled in via [gt](https://github.com/tegonal/gt)
    3. quality-assurance.yml => run for PR and pushed, checks that the code/script quality and such are ok.
-	  => you will typically add more jobs which run tests (sbt test or gradle build)
+      => you will typically add more jobs which run tests (sbt test or gradle build)
 
-5. git commit -a -m "initialised"
-6. As last step, delete this section and you are ready to start with your new OSS project
+7. git commit -a -m "initialised"
+8. As last step, delete this section and you are ready to start with your new OSS project
 
 <!-- for main -->
 
