@@ -64,11 +64,13 @@ licenseBadge="[![$licenseShortName](https://img.shields.io/badge/%E2%9A%96-${lic
 licenseLink="[$licenseFullName]($licenseUrl)"
 
 find "$project_dir" -type f \
-	-not -path "$project_dir/lib" \
+	-not -path "$project_dir/.gt/**/lib/**" \
+	-not -path "$project_dir/lib/**" \
+	-not -name "init.sh" \
 	-not -name "cleanup.yml" \
 	-not -name "gt-update.yml" \
 	-not -name "CODE_OF_CONDUCT.md" \
-	\( -name "*.md" -o -name "*.txt" -o -name "*.yaml" -o -name "*.yml" \) \
+	\( -name "*.md" -o -name "*.yaml" -o -name "*.yml" -o -name "*.sh" \) \
 	-print0 |
 	while read -r -d $'\0' file; do
 		PROJECT_NAME_UPPER="${projectNameUpper}" \

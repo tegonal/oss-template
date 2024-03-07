@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 #    __                          __
-#   / /____ ___ ____  ___  ___ _/ /       PROJECT_NAME is provided to you by https://github.com/tegonal/PROJECT_NAME
+#   / /____ ___ ____  ___  ___ _/ /       This script is provided to you by https://github.com/tegonal/PROJECT_NAME
 #  / __/ -_) _ `/ _ \/ _ \/ _ `/ /        Copyright 2024 Tegonal Genossenschaft <info@tegonal.com>
 #  \__/\__/\_, /\___/_//_/\_,_/_/         It is licensed under LICENSE_FULL_NAME
 #         /___/														Please report bugs and contribute back your improvements
