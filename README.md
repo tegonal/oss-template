@@ -29,7 +29,7 @@ Following the steps you should perform after cloning this template repository:
 
 [![Download](https://img.shields.io/badge/Download-v0.1.0-%23007ec6)](https://github.com/tegonal/PROJECT_NAME/releases/tag/v0.1.0)
 LICENSE_BADGE
-[![Quality Assurance](https://github.com/tegonal/PROJECT_NAME/workflows/quality-assurance/badge.svg?event=push&branch=main)](https://github.com/tegonal/PROJECT_NAME/actions/workflows/quality-assurance.yml?query=branch%3Amain)
+[![Quality Assurance](https://github.com/tegonal/PROJECT_NAME/actions/workflows/quality-assurance.yml/badge.svg?event=push&branch=main)](https://github.com/tegonal/PROJECT_NAME/actions/workflows/quality-assurance.yml?query=branch%3Amain)
 [![Newcomers Welcome](https://img.shields.io/badge/%F0%9F%91%8B-Newcomers%20Welcome-blueviolet)](https://github.com/tegonal/PROJECT_NAME/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22 "Ask in discussions for help")
 
 <!-- for main end -->
