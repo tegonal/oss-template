@@ -2,7 +2,7 @@
 #
 #    __                          __
 #   / /____ ___ ____  ___  ___ _/ /       This file is provided to you by https://github.com/tegonal/oss-template
-#  / __/ -_) _ `/ _ \/ _ \/ _ `/ /        It is licensed under European Union Public License 1.2
+#  / __/ -_) _ `/ _ \/ _ \/ _ `/ /        It is licensed under Creative Commons Zero v1.0 Universal
 #  \__/\__/\_, /\___/_//_/\_,_/_/         Please report bugs and contribute back your improvements
 #         /___/
 #                                         Version: v0.1.0-SNAPSHOT
