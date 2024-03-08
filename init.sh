@@ -31,7 +31,7 @@ fi
 if [[ choice -eq 1 ]]; then
 	licenseUrl="https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12"
 	licenseShortName="EUPL 1.2"
-	licenseFullName="European Union Public Licence, Version 1.2"
+	licenseFullName="European Union Public Licence v. 1.2"
 	cp "$project_dir/EUPL.LICENSE.txt" "$project_dir/LICENSE.txt"
 elif [[ choice -eq 2 ]]; then
 	licenseUrl="https://www.gnu.org/licenses/agpl-3.0.en.html"
