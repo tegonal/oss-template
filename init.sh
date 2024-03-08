@@ -2,21 +2,21 @@
 #
 #    __                          __
 #   / /____ ___ ____  ___  ___ _/ /       This file is provided to you by https://github.com/tegonal/oss-template
-#  / __/ -_) _ `/ _ \/ _ \/ _ `/ /        It is licensed under Creative Commons Zero v1.0 Universal
-#  \__/\__/\_, /\___/_//_/\_,_/_/         Please report bugs and contribute back your improvements
-#         /___/
-#                                         Version: v0.1.0-SNAPSHOT
+#  / __/ -_) _ `/ _ \/ _ \/ _ `/ /        Copyright 2024 Tegonal Genossenschaft
+#  \__/\__/\_, /\___/_//_/\_,_/_/         It is licensed under Creative Commons Zero v1.0 Universal
+#         /___/                           Please report bugs and contribute back your improvements
 #
+#                                         Version: v0.1.0-SNAPSHOT
 ###################################
 set -euo pipefail
 shopt -s inherit_errexit
 unset CDPATH
 
-project_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$0}")" >/dev/null && pwd 2>/dev/null)"
-readonly project_dir
+projectDir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$0}")" >/dev/null && pwd 2>/dev/null)"
+readonly projectDir
 
 if ! [[ -v dir_of_tegonal_scripts ]]; then
-	dir_of_tegonal_scripts="$project_dir/lib/tegonal-scripts/src"
+	dir_of_tegonal_scripts="$projectDir/lib/tegonal-scripts/src"
 	source "$dir_of_tegonal_scripts/setup.sh" "$dir_of_tegonal_scripts"
 fi
 sourceOnce "$dir_of_tegonal_scripts/utility/log.sh"
@@ -32,22 +32,22 @@ if [[ choice -eq 1 ]]; then
 	licenseUrl="https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12"
 	licenseShortName="EUPL 1.2"
 	licenseFullName="European Union Public Licence v. 1.2"
-	cp "$project_dir/EUPL.LICENSE.txt" "$project_dir/LICENSE.txt"
+	cp "$projectDir/EUPL.LICENSE.txt" "$projectDir/LICENSE.txt"
 elif [[ choice -eq 2 ]]; then
 	licenseUrl="https://www.gnu.org/licenses/agpl-3.0.en.html"
 	licenseShortName="AGPL 3"
 	licenseFullName="GNU Affero General Public License v3"
-	cp "$project_dir/AGPL.LICENSE.txt" "$project_dir/LICENSE.txt"
+	cp "$projectDir/AGPL.LICENSE.txt" "$projectDir/LICENSE.txt"
 elif [[ choice -eq 3 ]]; then
 	licenseUrl="https://www.apache.org/licenses/LICENSE-2.0"
 	licenseShortName="Apache 2.0"
 	licenseFullName="Apache License, Version 2.0"
-	cp "$project_dir/Apache.LICENSE.txt" "$project_dir/LICENSE.txt"
+	cp "$projectDir/Apache.LICENSE.txt" "$projectDir/LICENSE.txt"
 elif [[ choice -eq 4 ]]; then
 	licenseUrl="https://creativecommons.org/publicdomain/zero/1.0/"
 	licenseShortName="CC0 1.0"
 	licenseFullName="Creative Commons Zero v1.0 Universal"
-	cp "$project_dir/CC0.LICENSE.txt" "$project_dir/LICENSE.txt"
+	cp "$projectDir/CC0.LICENSE.txt" "$projectDir/LICENSE.txt"
 else
 	die "the selection %s is invalid, chose one between 1 and 4" "$choice"
 fi
@@ -63,9 +63,9 @@ read -r projectNameGithub
 licenseBadge="[![$licenseShortName](https://img.shields.io/badge/%E2%9A%96-${licenseShortName// /%220}-%230b45a6)]($licenseUrl \"License\")"
 licenseLink="[$licenseFullName]($licenseUrl)"
 
-find "$project_dir" -type f \
-	-not -path "$project_dir/.gt/**/lib/**" \
-	-not -path "$project_dir/lib/**" \
+find "$projectDir" -type f \
+	-not -path "$projectDir/.gt/**/lib/**" \
+	-not -path "$projectDir/lib/**" \
 	-not -name "init.sh" \
 	-not -name "cleanup.yml" \
 	-not -name "gt-update.yml" \
@@ -91,11 +91,11 @@ find "$project_dir" -type f \
 			"$file"
 	done
 
-find "$project_dir" -maxdepth 1 -name "*.LICENSE.txt" -print0 |
+find "$projectDir" -maxdepth 1 -name "*.LICENSE.txt" -print0 |
 	while read -r -d $'\0' license; do
 		rm "$license"
 	done
 
 logSuccess "initialised the repository, please follow the remaining steps in README.md"
 
-rm "$project_dir/init.sh"
+rm "$projectDir/init.sh"
