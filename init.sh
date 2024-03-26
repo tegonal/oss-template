@@ -52,13 +52,40 @@ else
 	die "the selection %s is invalid, chose one between 1 and 4" "$choice"
 fi
 
+defaultOrgName="Tegonal Genossenschaft"
+printf "Please insert the organisation name (default %s): " "$defaultOrgName"
+read -r orgName
+if [[ -z "$orgName" ]]; then
+	orgName="$defaultOrgName"
+fi
+
+defaultEmail="info@tegonal.com"
+printf "Please insert the organisation email (default %s): " "$defaultEmail"
+read -r orgEmail
+if [[ -z "$orgEmail" ]]; then
+	orgEmail="$defaultEmail"
+fi
+
+defaultOrgNameGithub="tegonal"
+printf "Please insert the github organisation name (default %s): " "$defaultOrgNameGithub"
+read -r orgNameGithub
+if [[ -z "$orgNameGithub" ]]; then
+	orgNameGithub="$defaultOrgNameGithub"
+fi
+
 printf "Please insert the project name: "
 read -r projectName
 tmpName="${projectName//-/_}"
 projectNameUpper="${tmpName^^}"
+tmpName="${projectName// /-}"
+defaultProjectNameGithub="${tmpName,,}"
 
-printf "Please insert the github name (default %s): " "$projectName"
+printf "Please insert the github project name (default %s): " "${defaultProjectNameGithub}"
 read -r projectNameGithub
+if [[ -z "$projectNameGithub" ]]; then
+	projectNameGithub="${defaultProjectNameGithub}"
+fi
+
 
 licenseBadge="[![$licenseShortName](https://img.shields.io/badge/%E2%9A%96-${licenseShortName// /%220}-%230b45a6)]($licenseUrl \"License\")"
 licenseLink="[$licenseFullName]($licenseUrl)"
@@ -73,20 +100,26 @@ find "$projectDir" -type f \
 	\( -name "*.md" -o -name "*.yaml" -o -name "*.yml" -o -name "*.sh" \) \
 	-print0 |
 	while read -r -d $'\0' file; do
+		PROJECT_NAME_GITHUB="$projectNameGithub" \
 		PROJECT_NAME_UPPER="${projectNameUpper}" \
 		PROJECT_NAME="$projectName" \
-		PROJECT_NAME_GITHUB="$projectNameGithub" \
-			LICENSE_BADGE="$licenseBadge" \
-			LICENSE_LINK="$licenseLink" \
-			LICENSE_FULLNAME="$licenseFullName" \
-			YEAR=$(date +%Y) \
+		ORG_NAME_GITHUB="$orgNameGithub" \
+		ORG_NAME="$orgName" \
+		ORG_EMAIL="$orgEmail" \
+		LICENSE_BADGE="$licenseBadge" \
+		LICENSE_LINK="$licenseLink" \
+		LICENSE_FULL_NAME="$licenseFullName" \
+		YEAR=$(date +%Y) \
 			perl -0777 -i \
 			-pe "s@PROJECT_NAME_GITHUB@\$ENV{PROJECT_NAME_GITHUB}@g;" \
 			-pe "s@PROJECT_NAME_UPPER@\$ENV{PROJECT_NAME_UPPER}@g;" \
 			-pe "s@PROJECT_NAME@\$ENV{PROJECT_NAME}@g;" \
+			-pe "s@ORG_NAME_GITHUB@\$ENV{ORG_NAME_GITHUB}@g;" \
+			-pe "s@ORG_NAME@\$ENV{ORG_NAME}@g;" \
+			-pe "s@ORG_EMAIL@\$ENV{ORG_EMAIL}@g;" \
 			-pe "s@LICENSE_BADGE@\$ENV{LICENSE_BADGE}@g;" \
 			-pe "s@LICENSE_LINK@\$ENV{LICENSE_LINK}@g;" \
-			-pe "s@LICENSE_FULLNAME@\$ENV{LICENSE_FULLNAME}@g;" \
+			-pe "s@LICENSE_FULL_NAME@\$ENV{LICENSE_FULL_NAME}@g;" \
 			-pe "s@YEAR@\$ENV{YEAR}@g;" \
 			"$file"
 	done
