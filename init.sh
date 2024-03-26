@@ -68,7 +68,9 @@ if [[ -z "$choice" ]]; then
 	choice=1
 fi
 
-if [[ choice -eq 1 ]]; then
+if ! [[ "$choice" =~ ^[1-4]+$ ]]; then
+	die "the selection %s is invalid, enter a number between 1 and 4" "$choice"
+elif [[ choice -eq 1 ]]; then
 	licenseUrl="https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12"
 	licenseShortName="EUPL 1.2"
 	licenseFullName="European Union Public Licence v. 1.2"
@@ -88,8 +90,6 @@ elif [[ choice -eq 4 ]]; then
 	licenseShortName="CC0 1.0"
 	licenseFullName="Creative Commons Zero v1.0 Universal"
 	cp "$projectDir/CC0.LICENSE.txt" "$projectDir/LICENSE.txt"
-else
-	die "the selection %s is invalid, chose one between 1 and 4" "$choice"
 fi
 
 if [[ "$orgNameGithub" == "$defaultOrgNameGithub" ]]; then
@@ -98,6 +98,15 @@ if [[ "$orgNameGithub" == "$defaultOrgNameGithub" ]]; then
 else
 	mv "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_other.sh" "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook.sh"
 	rm "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_tegonal.sh"
+
+	# remove the tegonal header
+	find "$projectDir/scripts" -type f -name "*.sh" -print0 |
+		while read -r -d $'\0' file; do
+			perl -0777 -i \
+			-pe "s@#    __                          __\n@#@;"\
+			-pe "s@#.*(This script is provided to you by|Copyright YEAR ORG_NAME <ORG_EMAIL>|It is licensed under LICENSE_FULL_NAME|Please report bugs and contribute back your improvements)@#  \${1}@g;" \
+			"$file"
+		done
 fi
 
 licenseBadge="[![$licenseShortName](https://img.shields.io/badge/%E2%9A%96-${licenseShortName// /%220}-%230b45a6)]($licenseUrl \"License\")"
