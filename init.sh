@@ -21,6 +21,46 @@ if ! [[ -v dir_of_tegonal_scripts ]]; then
 fi
 sourceOnce "$dir_of_tegonal_scripts/utility/log.sh"
 
+defaultOrgNameGithub="tegonal"
+printf "Please insert the github organisation name (default %s): " "$defaultOrgNameGithub"
+read -r orgNameGithub
+if [[ -z "$orgNameGithub" ]]; then
+	orgNameGithub="$defaultOrgNameGithub"
+fi
+
+if [[ "$orgNameGithub" == "$defaultOrgNameGithub" ]]; then
+	orgName="Tegonal Genossenschaft"
+	orgEmail="info@tegonal.com"
+else
+	printf "Please insert the organisation name: "
+	read -r orgName
+	if [[ -z ${orgName// /} ]]; then
+  	die "organisation name was empty or blank"
+  fi
+
+	printf "Please insert the organisation email: "
+  read -r orgEmail
+  if [[ -z ${orgEmail// /} ]]; then
+		die "organisation email was empty or blank"
+	fi
+fi
+
+printf "Please insert the project name: "
+read -r projectName
+if [[ -z ${projectName// /} ]]; then
+	die "project name was empty or blank"
+fi
+tmpName="${projectName//-/_}"
+projectNameUpper="${tmpName^^}"
+tmpName="${projectName// /-}"
+defaultProjectNameGithub="${tmpName,,}"
+
+printf "Please insert the github project name (default %s): " "${defaultProjectNameGithub}"
+read -r projectNameGithub
+if [[ -z "$projectNameGithub" ]]; then
+	projectNameGithub="${defaultProjectNameGithub}"
+fi
+
 printf "Please choose your license:\n(1) EUPL 1.2\n(2) AGPL 3\n(3) Apache 2.0\n(4) CC0 1.0 Universal\nYour selection (default (1) EUPL 1.2): "
 read -r choice
 
@@ -52,52 +92,24 @@ else
 	die "the selection %s is invalid, chose one between 1 and 4" "$choice"
 fi
 
-defaultOrgName="Tegonal Genossenschaft"
-printf "Please insert the organisation name (default %s): " "$defaultOrgName"
-read -r orgName
-if [[ -z "$orgName" ]]; then
-	orgName="$defaultOrgName"
+if [[ "$orgNameGithub" == "$defaultOrgNameGithub" ]]; then
+	mv "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_tegonal.sh" "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook.sh"
+	rm "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_other.sh"
+else
+	mv "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_other.sh" "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook.sh"
+	rm "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_tegonal.sh"
 fi
-
-defaultEmail="info@tegonal.com"
-printf "Please insert the organisation email (default %s): " "$defaultEmail"
-read -r orgEmail
-if [[ -z "$orgEmail" ]]; then
-	orgEmail="$defaultEmail"
-fi
-
-defaultOrgNameGithub="tegonal"
-printf "Please insert the github organisation name (default %s): " "$defaultOrgNameGithub"
-read -r orgNameGithub
-if [[ -z "$orgNameGithub" ]]; then
-	orgNameGithub="$defaultOrgNameGithub"
-fi
-
-printf "Please insert the project name: "
-read -r projectName
-tmpName="${projectName//-/_}"
-projectNameUpper="${tmpName^^}"
-tmpName="${projectName// /-}"
-defaultProjectNameGithub="${tmpName,,}"
-
-printf "Please insert the github project name (default %s): " "${defaultProjectNameGithub}"
-read -r projectNameGithub
-if [[ -z "$projectNameGithub" ]]; then
-	projectNameGithub="${defaultProjectNameGithub}"
-fi
-
 
 licenseBadge="[![$licenseShortName](https://img.shields.io/badge/%E2%9A%96-${licenseShortName// /%220}-%230b45a6)]($licenseUrl \"License\")"
 licenseLink="[$licenseFullName]($licenseUrl)"
 
 find "$projectDir" -type f \
-	-not -path "$projectDir/.gt/**/lib/**" \
 	-not -path "$projectDir/lib/**" \
 	-not -name "init.sh" \
 	-not -name "cleanup.yml" \
 	-not -name "gt-update.yml" \
-	-not -name "CODE_OF_CONDUCT.md" \
-	\( -name "*.md" -o -name "*.yaml" -o -name "*.yml" -o -name "*.sh" \) \
+	-not -name "*LICENSE.txt" \
+	\( -name "*.md" -o -name "*.txt" -o -name "*.yaml" -o -name "*.yml" -o -name "*.sh" \) \
 	-print0 |
 	while read -r -d $'\0' file; do
 		PROJECT_NAME_GITHUB="$projectNameGithub" \
@@ -109,18 +121,25 @@ find "$projectDir" -type f \
 		LICENSE_BADGE="$licenseBadge" \
 		LICENSE_LINK="$licenseLink" \
 		LICENSE_FULL_NAME="$licenseFullName" \
+		GITHUB_URL="https://github.com/$orgNameGithub/$projectNameGithub" \
 		YEAR=$(date +%Y) \
 			perl -0777 -i \
+			-pe "s@<PROJECT_NAME_GITHUB>@\$ENV{PROJECT_NAME_GITHUB}@g;" \
 			-pe "s@PROJECT_NAME_GITHUB@\$ENV{PROJECT_NAME_GITHUB}@g;" \
 			-pe "s@PROJECT_NAME_UPPER@\$ENV{PROJECT_NAME_UPPER}@g;" \
+			-pe "s@<PROJECT_NAME>@\$ENV{PROJECT_NAME}@g;" \
 			-pe "s@PROJECT_NAME@\$ENV{PROJECT_NAME}@g;" \
 			-pe "s@ORG_NAME_GITHUB@\$ENV{ORG_NAME_GITHUB}@g;" \
 			-pe "s@ORG_NAME@\$ENV{ORG_NAME}@g;" \
+			-pe "s@<OWNER>@\$ENV{ORG_NAME}@g;" \
 			-pe "s@ORG_EMAIL@\$ENV{ORG_EMAIL}@g;" \
+			-pe "s@<OWNER_EMAIL>@\$ENV{ORG_EMAIL}@g;" \
 			-pe "s@LICENSE_BADGE@\$ENV{LICENSE_BADGE}@g;" \
 			-pe "s@LICENSE_LINK@\$ENV{LICENSE_LINK}@g;" \
 			-pe "s@LICENSE_FULL_NAME@\$ENV{LICENSE_FULL_NAME}@g;" \
+			-pe "s@<GITHUB_URL>@\$ENV{GITHUB_URL}@g;" \
 			-pe "s@YEAR@\$ENV{YEAR}@g;" \
+			-pe "s@<TAG>@main@g;" \
 			"$file"
 	done
 
