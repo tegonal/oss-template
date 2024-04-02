@@ -144,6 +144,7 @@ find "$projectDir" -type f \
 			-pe "s@ORG_NAME_GITHUB@\$ENV{ORG_NAME_GITHUB}@g;" \
 			-pe "s@ORG_NAME@\$ENV{ORG_NAME}@g;" \
 			-pe "s@<OWNER>@\$ENV{ORG_NAME}@g;" \
+			-pe "s@<OWNER_GITHUB>@\$ENV{ORG_NAME_GITHUB}@g;" \
 			-pe "s@ORG_EMAIL@\$ENV{ORG_EMAIL}@g;" \
 			-pe "s@<OWNER_EMAIL>@\$ENV{ORG_EMAIL}@g;" \
 			-pe "s@LICENSE_BADGE@\$ENV{LICENSE_BADGE}@g;" \
