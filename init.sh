@@ -103,7 +103,7 @@ else
 	mv "$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv.tmp" "$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv"
 
 	# remove the tegonal header
-	find "$projectDir/scripts" -type f -name "*.sh" -print0 |
+	find "$projectDir/scripts" "$projectDir/.gt/remotes/" -type f -name "*.sh" -print0 |
 		while read -r -d $'\0' file; do
 			perl -0777 -i \
 			-pe "s@#    __                          __\n@#@;"\
