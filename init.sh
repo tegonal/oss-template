@@ -98,6 +98,9 @@ if [[ "$orgNameGithub" == "$defaultOrgNameGithub" ]]; then
 else
 	mv "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_other.sh" "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook.sh"
 	rm "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_tegonal.sh"
+	rm "$projectDir/lib/tegonal-gh-commons/src/gt/tegonal.data.source.sh"
+	head -n -1 <"$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv" > "$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv.tmp"
+	mv "$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv.tmp" "$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv"
 
 	# remove the tegonal header
 	find "$projectDir/scripts" -type f -name "*.sh" -print0 |
