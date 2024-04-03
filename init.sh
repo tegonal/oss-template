@@ -92,6 +92,13 @@ elif [[ choice -eq 4 ]]; then
 	cp "$projectDir/CC0.LICENSE.txt" "$projectDir/LICENSE.txt"
 fi
 
+defaultInitialYear="$(date +%Y)"
+printf "Please insert the year in which the project started (default %)" "$defaultInitialYear"
+read -r initialYear
+if [[ -z "$initialYear" ]]; then
+	initialYear="$defaultInitialYear"
+fi
+
 if [[ "$orgNameGithub" == "$defaultOrgNameGithub" ]]; then
 	mv "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_tegonal.sh" "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook.sh"
 	rm "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_other.sh"
@@ -134,7 +141,7 @@ find "$projectDir" -type f \
 		LICENSE_LINK="$licenseLink" \
 		LICENSE_FULL_NAME="$licenseFullName" \
 		GITHUB_URL="https://github.com/$orgNameGithub/$projectNameGithub" \
-		YEAR=$(date +%Y) \
+		YEAR="$initialYear" \
 			perl -0777 -i \
 			-pe "s@<PROJECT_NAME_GITHUB>@\$ENV{PROJECT_NAME_GITHUB}@g;" \
 			-pe "s@PROJECT_NAME_GITHUB@\$ENV{PROJECT_NAME_GITHUB}@g;" \
