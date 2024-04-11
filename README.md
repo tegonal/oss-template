@@ -1,7 +1,7 @@
 Following the steps you should perform after cloning this template repository:
 
 1. execute init.sh
-2. adjust/check the TBD in this file
+2. adjust/check the TODO in this file
 3. add a [new discussion category](https://github.com/tegonal/scala-commons/discussions/categories/new) 
    `Contributor Q&A` -- `Ask other contributors for help`
 4. in order that the tegonal-bot pushes changes to its own fork (e.g. when executing gt-update.yml -- 
@@ -43,7 +43,7 @@ LICENSE_BADGE
 
 # PROJECT_NAME
 
-TBD<add project description>
+TODO<add project description>
 
 ---
 ❗ You are taking a *sneak peek* at the next version. It could be that some features you find on this page are not
@@ -62,12 +62,12 @@ version: [README of v0.1.0](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITH
 
 # Installation
 
-TBD<adjust if not published to maven central> 
+TODO<adjust if not published to maven central> 
 PROJECT_NAME is published to maven central.
 
 # Documentation
 
-TBD<adjust if not published to github pages>
+TODO<adjust if not published to github pages>
 Code documentation can be found on github-pages: <https://ORG_NAME_GITHUB.github.io/PROJECT_NAME_GITHUB>.
 
 # Contributors and contribute
