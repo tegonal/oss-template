@@ -8,7 +8,7 @@ Following the steps you should perform after cloning this template repository:
    see below for an explanation) and then create a normal PR you need to:
    1. [add the repository variable](https://github.com/tegonal/minimalist/settings/variables/actions/new)
       `AUTO_PR_FORK_NAME` with value tegonal-bot/PROJECT_NAME_GITHUB
-   2. login as tegonal-bot and then [fork the repository](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB_GITHUB/fork)
+   2. login as tegonal-bot and then [fork the repository](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/fork)
 
 5. Following a short introduction in the scripts already setup in this repository:
    1. before-pr.sh is executed in .github/workflows/quality-assurance.yml
