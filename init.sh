@@ -35,12 +35,12 @@ else
 	printf "Please insert the organisation name: "
 	read -r orgName
 	if [[ -z ${orgName// /} ]]; then
-  	die "organisation name was empty or blank"
-  fi
+		die "organisation name was empty or blank"
+	fi
 
 	printf "Please insert the organisation email: "
-  read -r orgEmail
-  if [[ -z ${orgEmail// /} ]]; then
+	read -r orgEmail
+	if [[ -z ${orgEmail// /} ]]; then
 		die "organisation email was empty or blank"
 	fi
 fi
@@ -61,14 +61,14 @@ if [[ -z "$projectNameGithub" ]]; then
 	projectNameGithub="${defaultProjectNameGithub}"
 fi
 
-printf "Please choose your license:\n(1) EUPL 1.2\n(2) AGPL 3\n(3) Apache 2.0\n(4) CC0 1.0 Universal\nYour selection (default (1) EUPL 1.2): "
+printf "Please choose your license:\n(1) EUPL 1.2\n(2) AGPL 3\n(3) GPL 3\n(4) Apache 2.0\n(5) MIT\n(6) CC0 1.0 Universal\nYour selection (default (1) EUPL 1.2): "
 read -r choice
 
 if [[ -z "$choice" ]]; then
 	choice=1
 fi
 
-if ! [[ "$choice" =~ ^[1-4]+$ ]]; then
+if ! [[ "$choice" =~ ^[1-6]+$ ]]; then
 	die "the selection %s is invalid, enter a number between 1 and 4" "$choice"
 elif [[ choice -eq 1 ]]; then
 	licenseUrl="https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12"
@@ -81,11 +81,21 @@ elif [[ choice -eq 2 ]]; then
 	licenseFullName="GNU Affero General Public License v3"
 	cp "$projectDir/AGPL.LICENSE.txt" "$projectDir/LICENSE.txt"
 elif [[ choice -eq 3 ]]; then
+	licenseUrl="https://www.gnu.org/licenses/gpl-3.0.html"
+	licenseShortName="GPL 3.0"
+	licenseFullName="GNU General Public License v3"
+	cp "$projectDir/GPL.LICENSE.txt" "$projectDir/LICENSE.txt"
+elif [[ choice -eq 4 ]]; then
 	licenseUrl="https://www.apache.org/licenses/LICENSE-2.0"
 	licenseShortName="Apache 2.0"
 	licenseFullName="Apache License, Version 2.0"
 	cp "$projectDir/Apache.LICENSE.txt" "$projectDir/LICENSE.txt"
-elif [[ choice -eq 4 ]]; then
+elif [[ choice -eq 5 ]]; then
+	licenseUrl="https://www.apache.org/licenses/LICENSE-2.0"
+	licenseShortName="MIT"
+	licenseFullName="MIT License"
+	cp "$projectDir/MIT.LICENSE.txt" "$projectDir/LICENSE.txt"
+elif [[ choice -eq 6 ]]; then
 	licenseUrl="https://creativecommons.org/publicdomain/zero/1.0/"
 	licenseShortName="CC0 1.0"
 	licenseFullName="Creative Commons Zero v1.0 Universal"
@@ -108,7 +118,7 @@ else
 	rm "$projectDir/.gt/remotes/tegonal-gh-commons/pull-hook_tegonal.sh"
 
 	rm "$projectDir/lib/tegonal-gh-commons/src/gt/tegonal.data.source.sh"
-	head -n -1 <"$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv" > "$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv.tmp"
+	head -n -1 <"$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv" >"$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv.tmp"
 	mv "$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv.tmp" "$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv"
 
 	mv "$projectDir/.gt/remotes/gt/pull-hook_other.sh" "$projectDir/.gt/remotes/gt/pull-hook.sh"
@@ -118,9 +128,9 @@ else
 	find "$projectDir/scripts" "$projectDir/.gt/remotes/" -type f -name "*.sh" -print0 |
 		while read -r -d $'\0' file; do
 			perl -0777 -i \
-			-pe "s@#    __                          __\n@#@;"\
-			-pe "s@#.*(This script is provided to you by|Copyright YEAR ORG_NAME <ORG_EMAIL>|It is licensed under LICENSE_FULL_NAME|Please report bugs and contribute back your improvements)@#  \${1}@g;" \
-			"$file"
+				-pe "s@#    __                          __\n@#@;" \
+				-pe "s@#.*(This script is provided to you by|Copyright YEAR ORG_NAME <ORG_EMAIL>|It is licensed under LICENSE_FULL_NAME|Please report bugs and contribute back your improvements)@#  \${1}@g;" \
+				"$file"
 		done
 fi
 
@@ -137,16 +147,16 @@ find "$projectDir" -type f \
 	-print0 |
 	while read -r -d $'\0' file; do
 		PROJECT_NAME_GITHUB="$projectNameGithub" \
-		PROJECT_NAME_UPPER="${projectNameUpper}" \
-		PROJECT_NAME="$projectName" \
-		ORG_NAME_GITHUB="$orgNameGithub" \
-		ORG_NAME="$orgName" \
-		ORG_EMAIL="$orgEmail" \
-		LICENSE_BADGE="$licenseBadge" \
-		LICENSE_LINK="$licenseLink" \
-		LICENSE_FULL_NAME="$licenseFullName" \
-		GITHUB_URL="https://github.com/$orgNameGithub/$projectNameGithub" \
-		YEAR="$initialYear" \
+			PROJECT_NAME_UPPER="${projectNameUpper}" \
+			PROJECT_NAME="$projectName" \
+			ORG_NAME_GITHUB="$orgNameGithub" \
+			ORG_NAME="$orgName" \
+			ORG_EMAIL="$orgEmail" \
+			LICENSE_BADGE="$licenseBadge" \
+			LICENSE_LINK="$licenseLink" \
+			LICENSE_FULL_NAME="$licenseFullName" \
+			GITHUB_URL="https://github.com/$orgNameGithub/$projectNameGithub" \
+			YEAR="$initialYear" \
 			perl -0777 -i \
 			-pe "s@<PROJECT_NAME_GITHUB>@\$ENV{PROJECT_NAME_GITHUB}@g;" \
 			-pe "s@PROJECT_NAME_GITHUB@\$ENV{PROJECT_NAME_GITHUB}@g;" \
@@ -167,6 +177,20 @@ find "$projectDir" -type f \
 			-pe "s@<TAG>@main@g;" \
 			"$file"
 	done
+
+if [[ choice -eq 5 ]]; then
+	untilYear="$defaultInitialYear"
+	yearText="${initialYear}-${untilYear}"
+	if [[ "$untilYear" == "$initialYear" ]]; then
+		yearText="${initialYear}"
+	fi
+	YEAR="$yearText" \
+		ORG_NAME="$orgName" \
+		perl -0777 -i \
+		-pe "s@\[year\]@\$ENV{YEAR}@g;" \
+		-e "s@\[fullname\]@\$ENV{ORG_NAME}@g;" \
+		"$projectDir/LICENSE.txt"
+fi
 
 find "$projectDir" -maxdepth 1 -name "*.LICENSE.txt" -print0 |
 	while read -r -d $'\0' license; do
