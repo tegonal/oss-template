@@ -28,6 +28,8 @@ Following the steps you should perform after cloning this template repository:
 7. git commit -a -m "initialised"
 8. As last step, delete this section and you are ready to start with your new OSS project
 
+TODO #4 delete the above
+
 <!-- for main -->
 
 [![Download](https://img.shields.io/badge/Download-v0.1.0-%23007ec6)](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/releases/tag/v0.1.0)
@@ -46,7 +48,7 @@ LICENSE_BADGE
 
 # PROJECT_NAME
 
-TODO<add project description>
+TODO #1 <add project description>
 
 ---
 ❗ You are taking a *sneak peek* at the next version. It could be that some features you find on this page are not
@@ -65,12 +67,12 @@ version: [README of v0.1.0](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITH
 
 # Installation
 
-TODO<adjust if not published to maven central> 
+TODO #2 <adjust if not published to maven central> 
 PROJECT_NAME is published to maven central.
 
 # Documentation
 
-TODO<adjust if not published to github pages>
+TODO #3 <adjust if not published to github pages>
 Code documentation can be found on github-pages: <https://ORG_NAME_GITHUB.github.io/PROJECT_NAME_GITHUB>.
 
 # Contributors and contribute
