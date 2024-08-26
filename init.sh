@@ -112,6 +112,7 @@ else
 	mv "$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv.tmp" "$projectDir/.gt/remotes/tegonal-gh-commons/pulled.tsv"
 
 	mv "$projectDir/.gt/remotes/gt/pull-hook_other.sh" "$projectDir/.gt/remotes/gt/pull-hook.sh"
+	perl -0777 -i -pe "s@(github.repository_owner\s*==\s*)'tegonal'@\${1}'$orgNameGithub'@" "$projectDir/.github/workflows/gt-update.yml"
 
 	# remove the tegonal header
 	find "$projectDir/scripts" "$projectDir/.gt/remotes/" -type f -name "*.sh" -print0 |
