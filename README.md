@@ -1,3 +1,5 @@
+<div style="border:1px solid;padding:1em;">
+
 Following the steps you should perform after cloning this template repository:
 
 1. execute init.sh
@@ -25,10 +27,12 @@ Following the steps you should perform after cloning this template repository:
       are left open
       => you will typically add more jobs which run tests (sbt test or gradle build)
 
-7. git commit -a -m "initialised"
-8. As last step, delete this section and you are ready to start with your new OSS project
+7. As last step, delete this section (including the TODO below) and you are ready to start with your new OSS project  
+   ps: use something like `git commit -a -m "initialised"`
 
 TODO #4 delete the above
+
+</div>
 
 <!-- for main -->
 
@@ -40,7 +44,7 @@ LICENSE_BADGE
 <!-- for main end -->
 <!-- for release -->
 <!--
-[![Download](https://img.shields.io/badge/Download-v1.1.0-%23007ec6)](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/releases/tag/v1.1.0)
+[![Download](https://img.shields.io/badge/Download-v0.1.0-%23007ec6)](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/releases/tag/v0.1.0)
 LICENSE_BADGE
 [![Newcomers Welcome](https://img.shields.io/badge/%F0%9F%91%8B-Newcomers%20Welcome-blueviolet)](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22 "Ask in discussions for help")
 -->
