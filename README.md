@@ -3,11 +3,11 @@ Following the steps you should perform after cloning this template repository:
 
 1. execute init.sh
 2. adjust/check the TODO in this file
-3. add a [new discussion category](https://github.com/tegonal/scala-commons/discussions/categories/new) 
+3. add a [new discussion category](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/discussions/categories/new) 
    `Contributor Q&A` -- `Ask other contributors for help`
 4. in order that the tegonal-bot pushes changes to its own fork (e.g. when executing cleanup.yml or gt-update.yml -- 
    see below for an explanation) and then create a normal PR you need to:
-   1. [add the repository variable](https://github.com/tegonal/minimalist/settings/variables/actions/new)
+   1. [add the repository variable](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/settings/variables/actions/new)
       `AUTO_PR_FORK_NAME` with value tegonal-bot/PROJECT_NAME_GITHUB
    2. login as tegonal-bot and then [fork the repository](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/fork)
 
