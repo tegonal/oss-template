@@ -1,4 +1,3 @@
-<div style="border:1px solid;padding:1em;">
 
 Following the steps you should perform after cloning this template repository:
 
@@ -31,8 +30,6 @@ Following the steps you should perform after cloning this template repository:
    ps: use something like `git commit -a -m "initialised"`
 
 TODO #4 delete the above
-
-</div>
 
 <!-- for main -->
 
