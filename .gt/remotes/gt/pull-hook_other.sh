@@ -11,7 +11,6 @@
 set -euo pipefail
 shopt -s inherit_errexit
 unset CDPATH
-PROJECT_NAME_UPPER_LATEST_VERSION="main"
 
 if ! [[ -v dir_of_tegonal_scripts ]]; then
 	dir_of_tegonal_scripts="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$0}")" >/dev/null && pwd 2>/dev/null)/../../../lib/tegonal-scripts/src"
