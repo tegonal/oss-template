@@ -1,32 +1,33 @@
-
 Following the steps you should perform after cloning this template repository:
 
 1. execute init.sh
 2. adjust/check the TODO in this file
-3. add a [new discussion category](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/discussions/categories/new) 
+3. Enable discussions in the settings =>
+   General => [Discussions](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/settings#discussions-feature)
+4. add a [new discussion category](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/discussions/categories/new)
    `Contributor Q&A` -- `Ask other contributors for help`
-4. in order that the tegonal-bot pushes changes to its own fork (e.g. when executing cleanup.yml or gt-update.yml -- 
+5. in order that the tegonal-bot pushes changes to its own fork (e.g. when executing cleanup.yml or gt-update.yml --
    see below for an explanation) and then create a normal PR you need to:
-   1. [add the repository variable](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/settings/variables/actions/new)
-      `AUTO_PR_FORK_NAME` with value tegonal-bot/PROJECT_NAME_GITHUB
-   2. login as tegonal-bot and then [fork the repository](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/fork)
+	1. [add the repository variable](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/settings/variables/actions/new)
+	   `AUTO_PR_FORK_NAME` with value tegonal-bot/PROJECT_NAME_GITHUB
+	2. login as tegonal-bot and then [fork the repository](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/fork)
 
-5. Following a short introduction in the scripts already setup in this repository:
-   1. before-pr.sh is executed in .github/workflows/quality-assurance.yml
-      it currently executes scripts/cleanup-on-push-to-main.sh and scripts/run-shellcheck.sh 
-      and should be extended by project specific tasks such as `sbt versionPolicyCheck` (e.g. in a scala project)
-   2. cleanup-on-push-to-main.sh is executed in .github/workflows/cleanup.yml and is meant to cleanup after a PR.
-      => put commands such as code formatting in it, code generation which is committed etc.
-   3. run-shellcheck.sh checks that shellcheck doesn't find issues in scripts located in the scripts directory 
- 
-6. Following a short introduction in the workflows already setup in this repository:
-   1. cleanup.yml => run after push on main and intended to cleanup after a PR. 
-   2. gt-update.yml => run periodically, updates all files pulled in via [gt](https://github.com/tegonal/gt)
-   3. quality-assurance.yml => run for PR and pushes, checks that the code/script quality and such are ok and no TODOs
-      are left open
-      => you will typically add more jobs which run tests (sbt test or gradle build)
+6. Following a short introduction in the scripts already setup in this repository:
+	1. before-pr.sh is executed in .github/workflows/quality-assurance.yml
+	   it currently executes scripts/cleanup-on-push-to-main.sh and scripts/run-shellcheck.sh
+	   and should be extended by project specific tasks such as `sbt versionPolicyCheck` (e.g. in a scala project)
+	2. cleanup-on-push-to-main.sh is executed in .github/workflows/cleanup.yml and is meant to cleanup after a PR.
+	   => put commands such as code formatting in it, code generation which is committed etc.
+	3. run-shellcheck.sh checks that shellcheck doesn't find issues in scripts located in the scripts directory
 
-7. As last step, delete this section (including the TODO below) and you are ready to start with your new OSS project  
+7. Following a short introduction in the workflows already setup in this repository:
+	1. cleanup.yml => run after push on main and intended to cleanup after a PR.
+	2. gt-update.yml => run periodically, updates all files pulled in via [gt](https://github.com/tegonal/gt)
+	3. quality-assurance.yml => run for PR and pushes, checks that the code/script quality and such are ok and no TODOs
+	   are left open
+	   => you will typically add more jobs which run tests (sbt test or gradle build)
+
+8. As last step, delete this section (including the TODO below) and you are ready to start with your new OSS project  
    ps: use something like `git commit -a -m "initialised"`
 
 TODO #4 delete the above
@@ -62,13 +63,13 @@ version: [README of v0.1.0](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITH
 **Table of Content**
 
 - [Installation](#installation)
-- [Documentation](#documentation) 
+- [Documentation](#documentation)
 - [Contributors and contribute](#contributors-and-contribute)
 - [License](#license)
 
 # Installation
 
-TODO #2 <adjust if not published to maven central> 
+TODO #2 <adjust if not published to maven central>
 PROJECT_NAME is published to maven central.
 
 # Documentation
@@ -85,7 +86,8 @@ You are more than welcome to contribute as well:
 
 - star this repository if you like/use it
 - [open a bug](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/issues/new?template=bug_report.md) if you find one
-- Open a [new discussion](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/discussions/new?category=ideas) if you are missing a
+- Open a [new discussion](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/discussions/new?category=ideas) if you
+  are missing a
   feature
 - [ask a question](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/discussions/new?category=q-a)
   so that we better understand where we can improve.
