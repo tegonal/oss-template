@@ -5,12 +5,31 @@ Following the steps you should perform after cloning this template repository:
 3. Enable discussions in the settings =>
    General => [Discussions](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/settings#discussions-feature)
 4. add a [new discussion category](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/discussions/categories/new)
-   `Contributor Q&A` -- `Ask other contributors for help`
-5. in order that the tegonal-bot pushes changes to its own fork (e.g. when executing cleanup.yml or gt-update.yml --
-   see below for an explanation) and then create a normal PR you need to:
-	1. [add the repository variable](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/settings/variables/actions/new)
-	   `AUTO_PR_FORK_NAME` with value tegonal-bot/PROJECT_NAME_GITHUB
-	2. login as tegonal-bot and then [fork the repository](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/fork)
+   - icon: (click on icon) search for `computer` and choose the 💻 (laptop) 
+   - Category name: `Contributor Q&A`
+   - Description: `Ask other contributors for help`
+5. if you are
+   -  a member of tegonal:   
+      in order that the tegonal-bot pushes changes to its own fork (e.g. when executing cleanup.yml or gt-update.yml --
+      see below for an explanation) and then create a normal PR you need to:
+         1. [add the repository variable](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/settings/variables/actions/new)
+          `AUTO_PR_FORK_NAME` with value tegonal-bot/PROJECT_NAME_GITHUB
+         2. login as tegonal-bot and then [fork the repository](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/fork)
+   - not a member of tegonal:
+     1. Follow the guidelines in [gt -> GitHub Workflow](https://github.com/tegonal/gt?tab=readme-ov-file#github-workflow) 
+        to set up PUBLIC_GPG_KEYS_WE_TRUST (see next points for AUTO_PR_FORK_NAME and co.)
+     2. Variables and secrets
+         - either ask tegonal-bot to also push changes for your repository by [creating an issue](https://github.com/tegonal-bot/bot/issues/new?title=gt%20updates%20via%20tegonal-bot%20for%20...)
+            1. [add the repository variable](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/settings/variables/actions/new)
+			   `AUTO_PR_FORK_NAME` with value tegonal-bot/PROJECT_NAME_GITHUB
+             2. you will also get a token, [add it as secret to the repository](https://github.com/tegonal/cohiva/settings/secrets/actions/new)
+                with name `AUTO_PR_TOKEN` (or as organisation secret so that you can share it between multiple projects)
+         - use another user and correspondingly another fork:
+            1. [add the repository variable](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/settings/variables/actions/new)
+			   `AUTO_PR_FORK_NAME` with value which points to the fork something like `my-user/PROJECT_NAME_GITHUB`
+            2. create a personal access token
+            3. [add it as secret to the repository](https://github.com/tegonal/cohiva/settings/secrets/actions/new)
+			   with name `AUTO_PR_TOKEN`.
 
 6. Following a short introduction in the scripts already setup in this repository:
 	1. before-pr.sh is executed in .github/workflows/quality-assurance.yml
@@ -22,7 +41,8 @@ Following the steps you should perform after cloning this template repository:
 
 7. Following a short introduction in the workflows already setup in this repository:
 	1. cleanup.yml => run after push on main and intended to cleanup after a PR.
-	2. gt-update.yml => run periodically, updates all files pulled in via [gt](https://github.com/tegonal/gt)
+	2. gt-update.yml => run periodically, updates all files pulled in via [gt](https://github.com/tegonal/gt). Note, this workflow is disabled 
+       automatically after 60 days of inactivity in your repository.
 	3. quality-assurance.yml => run for PR and pushes, checks that the code/script quality and such are ok and no TODOs
 	   are left open
 	   => you will typically add more jobs which run tests (sbt test or gradle build)
