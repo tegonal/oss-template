@@ -137,7 +137,7 @@ fi
 # now that we no longer have the pull-hook templates we need to analyse the pull-hook.sh
 perl -0777 -i -pe 's@(runShellcheck dirs2 "\$sourcePath" -name )"pull-hook_\*.sh"@${1}"pull-hook.sh"@;' "$projectDir/scripts/run-shellcheck.sh"
 
-licenseBadge="[![$licenseShortName](https://img.shields.io/badge/%E2%9A%96-${licenseShortName// /%220}-%230b45a6)]($licenseUrl \"License\")"
+licenseBadge="[![$licenseShortName](https://img.shields.io/badge/%E2%9A%96-${licenseShortName// /%20}-%230b45a6)]($licenseUrl \"License\")"
 licenseLink="[$licenseFullName]($licenseUrl)"
 
 find "$projectDir" -type f \
