@@ -103,7 +103,7 @@ elif [[ choice -eq 6 ]]; then
 fi
 
 defaultInitialYear="$(date +%Y)"
-printf "Please insert the year in which the project started (default %s):" "$defaultInitialYear"
+printf "Please insert the year in which the project started (default %s): " "$defaultInitialYear"
 read -r initialYear
 if [[ -z "$initialYear" ]]; then
 	initialYear="$defaultInitialYear"
