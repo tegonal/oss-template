@@ -8,6 +8,7 @@ Following the steps you should perform after cloning this template repository:
    - icon: (click on icon) search for `computer` and choose the 💻 (laptop) 
    - Category name: `Contributor Q&A`
    - Description: `Ask other contributors for help`
+   - Discussion Format: Question / Answer (should already be preselected)
 5. if you are
    -  a member of tegonal:   
       in order that the tegonal-bot pushes changes to its own fork (e.g. when executing cleanup.yml or gt-update.yml --
