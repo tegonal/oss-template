@@ -28,7 +28,7 @@ if [[ -z "$orgNameGithub" ]]; then
 	orgNameGithub="$defaultOrgNameGithub"
 fi
 
-if [[ "$orgNameGithub" == "$defaultOrgNameGithub" ]]; then
+if [[ $orgNameGithub == "$defaultOrgNameGithub" ]] || [[ $orgNameGithub == "tegonal-bot-org" ]] || [[ $orgNameGithub == "tegonal-bot" ]]; then
 	orgName="Tegonal Genossenschaft"
 	orgEmail="info@tegonal.com"
 else
