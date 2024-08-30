@@ -28,7 +28,9 @@ if [[ -z "$orgNameGithub" ]]; then
 	orgNameGithub="$defaultOrgNameGithub"
 fi
 
+isTegonalOrg=0
 if [[ $orgNameGithub == "$defaultOrgNameGithub" ]] || [[ $orgNameGithub == "tegonal-bot-org" ]] || [[ $orgNameGithub == "tegonal-bot" ]]; then
+	isTegonalOrg=1
 	orgName="Tegonal Genossenschaft"
 	orgEmail="info@tegonal.com"
 else
@@ -124,14 +126,20 @@ else
 	mv "$projectDir/.gt/remotes/gt/pull-hook_other.sh" "$projectDir/.gt/remotes/gt/pull-hook.sh"
 	perl -0777 -i -pe "s@(github.repository_owner\s*==\s*)'tegonal'@\${1}'$orgNameGithub'@" "$projectDir/.github/workflows/gt-update.yml"
 
-	# remove the tegonal header
-	find "$projectDir/scripts" "$projectDir/.gt/remotes/" -type f -name "*.sh" -print0 |
-		while read -r -d $'\0' file; do
-			perl -0777 -i \
-				-pe "s@#    __                          __\n@#@;" \
-				-pe "s@#.*(This script is provided to you by|Copyright YEAR ORG_NAME <ORG_EMAIL>|It is licensed under LICENSE_FULL_NAME|Please report bugs and contribute back your improvements)@#  \${1}@g;" \
-				"$file"
-		done
+  # we don't remove the logo if it is a tegonal related org
+	if ! [[ $isTegonalOrg -eq 1 ]]; then
+		# remove the tegonal logo
+		{
+			find "$projectDir/scripts" "$projectDir/.gt/remotes/" -type f -name "*.sh" -print0
+			find "$projectDir/.github/workflows" -type f -name "quality-assurance.yml" -print0
+		}|
+			while read -r -d $'\0' file; do
+				perl -0777 -i \
+					-pe "s@#    __                          __\n@#@;" \
+					-pe "s@#.*(This [a-zA-Z]+ is provided to you by|Copyright YEAR ORG_NAME <ORG_EMAIL>|It is licensed under LICENSE_FULL_NAME|Please report bugs and contribute back your improvements)@#  \${1}@g;" \
+					"$file"
+			done
+		fi
 fi
 
 # now that we no longer have the pull-hook templates we need to analyse the pull-hook.sh
