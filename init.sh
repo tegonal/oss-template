@@ -31,7 +31,7 @@ fi
 isTegonalOrg=0
 if [[ $orgNameGithub == "$defaultOrgNameGithub" ]] || [[ $orgNameGithub == "tegonal-bot-org" ]] || [[ $orgNameGithub == "tegonal-bot" ]]; then
 	isTegonalOrg=1
-	orgName="Tegonal Genossenschaft"
+	orgName="Tegonal Genossenschaft, Switzerland"
 	orgEmail="info@tegonal.com"
 else
 	printf "Please insert the organisation name: "
