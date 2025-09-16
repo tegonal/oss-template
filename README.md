@@ -81,7 +81,7 @@ version: [README of v0.1.0](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITH
 
 ---
 
-**Table of Content**
+**Table of Contents**
 
 - [Installation](#installation)
 - [Documentation](#documentation)
