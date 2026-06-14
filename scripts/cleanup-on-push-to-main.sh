@@ -21,7 +21,7 @@ sourceOnce "$scriptsDir/run-shfmt.sh"
 
 function cleanupOnPushToMain() {
 	customRunShfmt || die "was not able to format"
-	logSuccess "nothing to cleanup yet"
+	logSuccess "Cleanup on push to main completed"
 }
 
 ${__SOURCED__:+return}
