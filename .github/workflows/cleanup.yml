@@ -33,6 +33,8 @@ jobs:
       #gt-placeholder-gh-action-checkout-end
 
       #gt-placeholder-install-dependencies-start
+      - name: Install shfmt
+        run: ./src/ci/install-shfmt.sh
       #gt-placeholder-install-dependencies-end
 
       - name: Cleanup Sources

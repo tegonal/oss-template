@@ -21,14 +21,14 @@ sourceOnce "$dir_of_github_commons/gt/pull-hook-functions.sh"
 sourceOnce "$dir_of_tegonal_scripts/utility/parse-fn-args.sh"
 
 function gt_pullHook_gt_before() {
-  local -r _tag=$1 source=$2 _target=$3
+	local -r _tag=$1 source=$2 _target=$3
 
-  if [[ $source =~ .*/.github/workflows/gt-update.yml ]]; then
-    perl -0777 -i -pe "s/(if: github.repository_owner == )'tegonal'/\${1}'ORG_NAME_GITHUB'/" "$source"
-  fi
+	if [[ $source =~ .*/.github/workflows/gt-update.yml ]]; then
+		perl -0777 -i -pe "s/(if: github.repository_owner == )'tegonal'/\${1}'ORG_NAME_GITHUB'/" "$source"
+	fi
 }
 
-function gt_pullHook_gt_after(){
-  # no op, nothing to do
-  true
+function gt_pullHook_gt_after() {
+	# no op, nothing to do
+	true
 }
