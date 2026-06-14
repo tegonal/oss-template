@@ -17,8 +17,10 @@ if ! [[ -v scriptsDir ]]; then
 	readonly scriptsDir
 fi
 source "$scriptsDir/dirs.source.sh"
+sourceOnce "$scriptsDir/run-shfmt.sh"
 
 function cleanupOnPushToMain() {
+	customRunShfmt || die "was not able to format"
 	logSuccess "nothing to cleanup yet"
 }
 

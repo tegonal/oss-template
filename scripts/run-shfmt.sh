@@ -9,7 +9,7 @@
 #                                         Version: v0.1.0-SNAPSHOT
 ###################################
 set -euo pipefail
-shopt -s inherit_errexit
+shopt -s inherit_errexit || { echo >&2 "please update to bash 5, see errors above" && exit 1; }
 unset CDPATH
 
 if ! [[ -v scriptsDir ]]; then
@@ -17,14 +17,15 @@ if ! [[ -v scriptsDir ]]; then
 	readonly scriptsDir
 fi
 source "$scriptsDir/dirs.source.sh"
-sourceOnce "$scriptsDir/cleanup-on-push-to-main.sh"
-sourceOnce "$scriptsDir/run-shellcheck.sh"
+sourceOnce "$dir_of_tegonal_scripts/qa/run-shfmt.sh"
 
-function beforePr() {
-	# using && because this function might be used on the left side of an ||
-	customRunShellcheck &&
-		cleanupOnPushToMain
+function customRunShfmt() {
+	# shellcheck disable=SC2034   # is passed by name to runShfmt
+	local -ra dirs=("$scriptsDir")
+	runShfmt dirs || return $?
+
+	runShfmtPullHooks "$scriptsDir/../.gt"
 }
 
 ${__SOURCED__:+return}
-beforePr "$@"
+customRunShfmt "$@"

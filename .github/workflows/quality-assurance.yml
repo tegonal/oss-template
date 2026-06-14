@@ -18,5 +18,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: install shellcheck
         run: ./lib/tegonal-scripts/src/ci/install-shellcheck.sh
+      - name: install shfmt
+        run: ./lib/tegonal-scripts/src/ci/install-shfmt.sh
       - name: before-pr.sh
         run: ./scripts/before-pr.sh
