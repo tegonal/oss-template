@@ -5,7 +5,7 @@
 #  \__/\__/\_, /\___/_//_/\_,_/_/         It is licensed under Creative Commons Zero v1.0 Universal
 #         /___/                           Please report bugs and contribute back your improvements
 #
-#                                         Version: v5.0.3
+#                                         Version: v6.0.0
 ###################################
 name: Cleanup
 
@@ -29,7 +29,7 @@ jobs:
     #gt-placeholder-runs-on-end
     steps:
       #gt-placeholder-gh-action-checkout-start
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       #gt-placeholder-gh-action-checkout-end
 
       #gt-placeholder-install-dependencies-start
