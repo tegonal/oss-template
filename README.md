@@ -5,7 +5,7 @@ Following the steps you should perform after cloning this template repository:
 3. Enable discussions in the settings =>
    General => [Discussions](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/settings#discussions-feature)
 4. add a [new discussion category](https://github.com/ORG_NAME_GITHUB/PROJECT_NAME_GITHUB/discussions/categories/new)
-   - icon: (click on icon) search for `computer` and choose the 💻 (laptop) 
+   - icon: (click on icon) search for `computer` and choose the 💻 (search for screen) 
    - Category name: `Contributor Q&A`
    - Description: `Ask other contributors for help`
    - Discussion Format: Question / Answer (should already be preselected)
